@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE module PUBLIC "//gwt-module/" "http://google-web-toolkit.googlecode.com/svn/tags/2.1.0/distro-source/core/src/gwt-module.dtd">
+<module>
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name='com.nsalz.gwt.canvas.create.Canvas' />
+
+  <source path='client' />
+  <source path='shared' />
+
+  <set-configuration-property name="CssResource.obfuscationPrefix" value="empty" />
+
+  <inherits name='com.google.gwt.logging.Logging' />
+  <set-property name="gwt.logging.enabled" value="TRUE" />
+  <set-property name="gwt.logging.logLevel" value="SEVERE" />
+  <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+  <set-property name="gwt.logging.developmentModeHandler" value="ENABLED" />
+  <set-property name="gwt.logging.firebugHandler" value="ENABLED" />
+  <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
+  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+  <set-property name="gwt.logging.systemHandler" value="ENABLED" />
+  <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
+</module>
