@@ -1,14 +1,17 @@
-GOALS
+Goals
+-----
 
 * Provide basic drawing functionality leveraging features of canvas
 * Develop this in unison with gwt-canvas-shapes to create a reasonably framework
 * Most Critical: The gwt-canvas-shapes library needs a good user interface to create the code to define and build shapes
 
-NOT GOALS
+Not Goals
+---------
 
 * Provide a useful drawing tool
 
-RUNNING
+Running
+-------
 
 I've tested this with Eclipse 3.5. Later versions will likely
 also work, earlier versions may not.
@@ -39,7 +42,8 @@ should default to index.jsp.
 2. If prompted for which directory to run from, simply select the war directory
 that Eclipse may defaults to.
 
-DEPLOYING
+Deploying
+---------
 
 1. Right click on the project -> Google -> Deploy to App Engine
 2. Choose a site to deploy to (I'll have to pull that setting out of the repository into a setting file sometime).
