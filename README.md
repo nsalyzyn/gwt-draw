@@ -17,6 +17,7 @@ I've tested this with Eclipse 3.5. Later versions will likely
 also work, earlier versions may not.
 
 You will need to install the following plugin components:
+
 * Google Plugin for Eclipse including AppEngine (instructions at http://code.google.com/eclipse/)
 * m2eclipse Core
 * Maven Integration for WTP (in m2eclipse extras)
