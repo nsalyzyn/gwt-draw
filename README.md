@@ -18,12 +18,17 @@ also work, earlier versions may not.
 
 You will need to install the following plugin components:
 
-* Google Plugin for Eclipse including AppEngine (instructions at http://code.google.com/eclipse/)
+* Google Plugin for Eclipse including AppEngine (instructions at <http://code.google.com/eclipse/>)
+
 * m2eclipse Core
+
 * Maven Integration for WTP (in m2eclipse extras)
+
   Instructions for installing the maven plugins can be found here:
-  http://m2eclipse.sonatype.org/installing-m2eclipse.html
-* An installed version of the canvas shape library: git@github.com:nsalyzyn/gwt-canvas-shapes.git
+
+  <http://m2eclipse.sonatype.org/installing-m2eclipse.html>
+
+* An installed version of the canvas shape library: `git@github.com:nsalyzyn/gwt-canvas-shapes.git`
 
 Ensure Eclipse is configured to use Java 1.6 as this uses
 AppEngine.

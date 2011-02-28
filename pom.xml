@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.nsalz.gwt.canvas.draw</groupId>
   <artifactId>draw</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>war</packaging>
   <name>Canvas Shape Draw App</name>
   <description>Shape Drawing Utility to make use of ...</description>
@@ -44,7 +44,7 @@
     <dependency>
       <groupId>com.nsalz.gwt.canvas.create</groupId>
       <artifactId>create</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.2</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
