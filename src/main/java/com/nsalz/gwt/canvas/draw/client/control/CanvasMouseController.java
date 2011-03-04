@@ -87,7 +87,9 @@ public class CanvasMouseController
                     return false;
                 }
             }
-            return false;
+            else {
+                return false;
+            }
         } else {
             return false;
         }
