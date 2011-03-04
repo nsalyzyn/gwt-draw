@@ -4,8 +4,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.nsalz.gwt.canvas.create.client.ui.ShapeCanvas;
 import com.nsalz.gwt.canvas.draw.client.control.CanvasMouseController;
-import com.nsalz.gwt.canvas.draw.client.control.DrawCommandStack;
-import com.nsalz.gwt.canvas.draw.client.model.DrawingModel;
+import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
+import com.nsalz.gwt.canvas.draw.client.model.DrawingBoardModel;
 import com.nsalz.gwt.canvas.draw.client.resource.ShapeDrawResources;
 import com.nsalz.gwt.canvas.draw.client.ui.ShapeDrawWidget;
 
@@ -20,11 +20,17 @@ public class ShapeDrawApp
         if (canvas == null) {
             throw new ShapeDrawException();
         }
-        DrawingModel drawingModel = new DrawingModel(canvas.getDrawingBoard());
+        DrawAppModel drawingModel = new DrawAppModel(canvas.getDrawingBoard());
         
-        DrawCommandStack undoStack = new DrawCommandStack(drawingModel);
-        new CanvasMouseController(canvas, undoStack, drawingModel);
-        shapeDrawWidget = new ShapeDrawWidget(canvas, resources.getLayoutCss());
+        CanvasMouseController mouseController = new CanvasMouseController(drawingModel);       
+        mouseController.addHandlers(canvas);
+        
+        DrawingBoardModel drawingBoardModel = drawingModel.getDrawingBoardModel();
+        drawingBoardModel.setHeight(canvas.getOffsetHeight());
+        drawingBoardModel.setWidth(canvas.getOffsetWidth());
+        canvas.addResizeHandler(drawingBoardModel);       
+        
+        shapeDrawWidget = new ShapeDrawWidget(canvas, resources, drawingModel, drawingBoardModel);
     }
 
     public void load(LayoutPanel panel)

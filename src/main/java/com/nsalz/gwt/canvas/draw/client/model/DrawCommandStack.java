@@ -1,16 +1,15 @@
-package com.nsalz.gwt.canvas.draw.client.control;
+package com.nsalz.gwt.canvas.draw.client.model;
 
 import java.util.Stack;
 
-import com.nsalz.gwt.canvas.draw.client.model.DrawingModel;
 
 public class DrawCommandStack
 {
-    private final DrawingModel drawingModel;
+    private final DrawingBoardModel drawingModel;
     private final Stack<DrawCommand> commands = new Stack<DrawCommand>();
     private final Stack<DrawCommand> undoneCommands = new Stack<DrawCommand>();
 
-    public DrawCommandStack(DrawingModel drawingModel)
+    public DrawCommandStack(DrawingBoardModel drawingModel)
     {
         this.drawingModel = drawingModel;
     }

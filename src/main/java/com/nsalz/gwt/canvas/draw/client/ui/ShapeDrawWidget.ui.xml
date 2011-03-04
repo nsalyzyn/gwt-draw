@@ -1,6 +1,8 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sd="urn:import:com.nsalz.gwt.canvas.draw.client.ui">
 
+  <ui:with field="resources" type="com.nsalz.gwt.canvas.draw.client.resource.ShapeDrawResources"/>
+
   <g:DockLayoutPanel unit="PX">
     <g:west size="200">
       <sd:ShapeDrawToolbar ui:field="toolbar" />
