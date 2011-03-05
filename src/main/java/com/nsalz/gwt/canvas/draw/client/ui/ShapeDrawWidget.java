@@ -11,6 +11,7 @@ import com.nsalz.gwt.canvas.create.client.ui.ShapeCanvas;
 import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
 import com.nsalz.gwt.canvas.draw.client.model.DrawingLayerModel;
+import com.nsalz.gwt.canvas.draw.client.resource.ProjectResourceFactory;
 import com.nsalz.gwt.canvas.draw.client.resource.ShapeDrawResources;
 
 public class ShapeDrawWidget extends Composite implements RequiresResize, ProvidesResize
@@ -29,11 +30,12 @@ public class ShapeDrawWidget extends Composite implements RequiresResize, Provid
     private final DockLayoutPanel mainPanel;
     
 
-    public ShapeDrawWidget(ShapeCanvas<ProjectGraphic> canvas, ShapeDrawResources resources, DrawAppModel drawingModel, DrawingLayerModel drawingLayerModel)
+    public ShapeDrawWidget(ShapeCanvas<ProjectGraphic> canvas, DrawAppModel drawingModel, DrawingLayerModel drawingLayerModel)
     {
         toolbar = new ShapeDrawToolbar(drawingModel);
         this.canvas = canvas;
-        this.resources = resources;
+        resources = ProjectResourceFactory.get().getResources();
+        resources.layoutCss().ensureInjected();
         
         initWidget(mainPanel = BINDER.createAndBindUi(this));
     }

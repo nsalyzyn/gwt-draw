@@ -6,10 +6,18 @@ import com.google.gwt.resources.client.CssResource;
 public interface ShapeDrawResources extends ClientBundle
 {
     @Source("layout.css")
-    public LayoutCss getLayoutCss();
+    public LayoutCss layoutCss();
 
     public interface LayoutCss extends CssResource
     {
+        public int toolWidth();
 
+        public String canvasStyle();
+
+        public String canvasWrapStyle();
+
+        public String toolWrapStyle();
+
+        public String toolbarStyle();
     }
 }

@@ -24,7 +24,7 @@
     <profile>
       <id>production</id>
       <properties>
-        <gwt.modulePostfix/>
+        <gwt.modulePostfix />
       </properties>
     </profile>
   </profiles>
@@ -44,7 +44,7 @@
     <dependency>
       <groupId>com.nsalz.gwt.canvas.create</groupId>
       <artifactId>create</artifactId>
-      <version>0.0.4</version>
+      <version>0.0.5</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -176,7 +176,7 @@
         </configuration>
         <executions>
           <execution>
-            <id />
+            <id>gae-validate</id>
             <phase>validate</phase>
             <goals>
               <goal>unpack</goal>

@@ -150,6 +150,7 @@ public class CanvasMouseController
                         switch (event.getNativeButton()) {
                         case NativeEvent.BUTTON_LEFT:
                             tool.onMouseDown(event.getX(), event.getY());
+                            event.preventDefault();
                             break;
                         case NativeEvent.BUTTON_RIGHT:
                             tool.onRightMouseDown(event.getX(), event.getY());

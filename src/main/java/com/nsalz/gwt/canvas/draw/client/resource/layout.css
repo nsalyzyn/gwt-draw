@@ -1,0 +1,37 @@
+
+@def toolWidth 200px;
+@def toolPadding 8px;
+@def toolCurl 16px;
+@def toolMargin 12px;
+@def minorCurl 8px;
+@def lightBorder #888888;
+@def lightBorderFill #F3F3F3;
+@def darkBorder #555555;
+@def darkBorderFill #EFEFEF;
+
+.canvasWrapStyle {
+	border: 2px solid darkBorder;
+	\-moz-border-radius: minorCurl;
+	\-webkit-border-radius: minorCurl;
+	border-radius: minorCurl;
+}
+
+.canvasStyle, .canvasStyle:focus {
+	border:none;
+	outline:none;
+	margin:0;
+	padding:0;
+}
+
+.toolWrapStyle {
+	margin: toolMargin;
+	border: 2px solid lightBorder;
+	background-color: lightBorderFill;
+	\-moz-border-radius: toolCurl;
+	\-webkit-border-radius: toolCurl;
+	border-radius: toolCurl;
+}
+
+.toolbarStyle {
+	margin:toolPadding;
+}

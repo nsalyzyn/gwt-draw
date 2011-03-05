@@ -2,5 +2,5 @@
 <module rename-to="shapedraw">
   <inherits name="com.nsalz.gwt.canvas.draw.ShapeDraw" />
 
-  <set-property name="user.agent" value="safari" />
+  <set-property name="user.agent" value="safari,gecko1_8" />
 </module>
