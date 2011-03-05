@@ -34,8 +34,8 @@ public class BaseDrawTool implements DrawTool
     public void onMouseDown(int x, int y)
     {
         path = new LinePath(x, y, x, y);
-        drawingModel.getDrawingLayerModel().getDrawingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path)));
-        drawingModel.getDrawingLayerModel().getDrawingLayer().repaint();
+        drawingModel.getDrawingLayerModel().getWorkingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path)));
+        drawingModel.getDrawingLayerModel().repaint();
     }
 
     @Override
@@ -50,8 +50,8 @@ public class BaseDrawTool implements DrawTool
     public void onRightMouseDown(int x, int y)
     {
         if (graphic != null) {
-            drawingModel.getDrawingLayerModel().getDrawingLayer().getGraphicList().remove(graphic);
-            drawingModel.getDrawingLayerModel().getDrawingLayer().repaint();
+            drawingModel.getDrawingLayerModel().getWorkingLayer().getGraphicList().clear();
+            drawingModel.getDrawingLayerModel().repaint();
             path = null;
             graphic = null;
         }
@@ -63,16 +63,19 @@ public class BaseDrawTool implements DrawTool
         if (path != null) {
             path.setX2(x);
             path.setY2(y);
-            drawingModel.getDrawingLayerModel().getDrawingLayer().repaint();
+            drawingModel.getDrawingLayerModel().repaint();
         }
     }
 
     @Override
     public void onMouseUp(int x, int y)
     {
-        drawingModel.getDrawingLayerModel().getUndoStack().doCommand(new AlreadyPushedGraphicCommand(graphic));
-        graphic = null;
-        path = null;
+        if (graphic != null) {
+            drawingModel.getDrawingLayerModel().getWorkingLayer().getGraphicList().clear();
+            drawingModel.getDrawingLayerModel().getUndoStack().doCommand(new PushGraphicCommand(graphic));
+            graphic = null;
+            path = null;
+        }
     }
 
 }
