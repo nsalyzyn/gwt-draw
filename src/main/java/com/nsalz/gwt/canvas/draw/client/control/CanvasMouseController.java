@@ -57,11 +57,11 @@ public class CanvasMouseController
                             char keyCode = (char) nativeEvent.getKeyCode();
                             if (keyCode == 'Z') {
                                 if (!willTargetAcceptUndo(nativeEvent.getEventTarget())) {
-                                    drawingModel.getDrawingBoardModel().getUndoStack().undo();
+                                    drawingModel.getDrawingLayerModel().getUndoStack().undo();
                                 }
                             } else if (keyCode == 'Y') {
                                 if (!willTargetAcceptUndo(nativeEvent.getEventTarget())) {
-                                    drawingModel.getDrawingBoardModel().getUndoStack().redo();
+                                    drawingModel.getDrawingLayerModel().getUndoStack().redo();
                                 }
                             }
                         }

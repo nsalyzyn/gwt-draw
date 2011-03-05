@@ -2,6 +2,7 @@ package com.nsalz.gwt.canvas.draw.client.control;
 
 import com.nsalz.gwt.canvas.create.client.shapes.LinePath;
 import com.nsalz.gwt.canvas.create.client.tools.ShapeGraphic;
+import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
 
 public class BaseDrawTool implements DrawTool
@@ -9,7 +10,7 @@ public class BaseDrawTool implements DrawTool
     private DrawAppModel drawingModel;
 
     private LinePath path = null;
-    private ShapeGraphic graphic = null;
+    private ProjectGraphic graphic = null;
 
     public BaseDrawTool(DrawAppModel drawingModel)
     {
@@ -33,8 +34,8 @@ public class BaseDrawTool implements DrawTool
     public void onMouseDown(int x, int y)
     {
         path = new LinePath(x, y, x, y);
-        drawingModel.getDrawingBoardModel().getDrawingBoard().addGraphic(graphic = new ShapeGraphic(path));
-        drawingModel.getDrawingBoardModel().getDrawingBoard().repaint();
+        drawingModel.getDrawingLayerModel().getDrawingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path)));
+        drawingModel.getDrawingLayerModel().getDrawingLayer().repaint();
     }
 
     @Override
@@ -49,8 +50,8 @@ public class BaseDrawTool implements DrawTool
     public void onRightMouseDown(int x, int y)
     {
         if (graphic != null) {
-            drawingModel.getDrawingBoardModel().getDrawingBoard().getGraphicList().remove(graphic);
-            drawingModel.getDrawingBoardModel().getDrawingBoard().repaint();
+            drawingModel.getDrawingLayerModel().getDrawingLayer().getGraphicList().remove(graphic);
+            drawingModel.getDrawingLayerModel().getDrawingLayer().repaint();
             path = null;
             graphic = null;
         }
@@ -62,14 +63,14 @@ public class BaseDrawTool implements DrawTool
         if (path != null) {
             path.setX2(x);
             path.setY2(y);
-            drawingModel.getDrawingBoardModel().getDrawingBoard().repaint();
+            drawingModel.getDrawingLayerModel().getDrawingLayer().repaint();
         }
     }
 
     @Override
     public void onMouseUp(int x, int y)
     {
-        drawingModel.getDrawingBoardModel().getUndoStack().doCommand(new AlreadyPushedGraphicCommand(graphic));
+        drawingModel.getDrawingLayerModel().getUndoStack().doCommand(new AlreadyPushedGraphicCommand(graphic));
         graphic = null;
         path = null;
     }

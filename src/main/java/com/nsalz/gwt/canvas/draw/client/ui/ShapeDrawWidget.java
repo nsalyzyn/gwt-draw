@@ -8,8 +8,9 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.ProvidesResize;
 import com.google.gwt.user.client.ui.RequiresResize;
 import com.nsalz.gwt.canvas.create.client.ui.ShapeCanvas;
+import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
-import com.nsalz.gwt.canvas.draw.client.model.DrawingBoardModel;
+import com.nsalz.gwt.canvas.draw.client.model.DrawingLayerModel;
 import com.nsalz.gwt.canvas.draw.client.resource.ShapeDrawResources;
 
 public class ShapeDrawWidget extends Composite implements RequiresResize, ProvidesResize
@@ -21,14 +22,14 @@ public class ShapeDrawWidget extends Composite implements RequiresResize, Provid
     @UiField(provided = true)
     ShapeDrawToolbar toolbar;
     @UiField(provided = true)
-    ShapeCanvas canvas;
+    ShapeCanvas<ProjectGraphic> canvas;
     @UiField(provided = true)
     ShapeDrawResources resources;
     
     private final DockLayoutPanel mainPanel;
     
 
-    public ShapeDrawWidget(ShapeCanvas canvas, ShapeDrawResources resources, DrawAppModel drawingModel, DrawingBoardModel drawingBoardModel)
+    public ShapeDrawWidget(ShapeCanvas<ProjectGraphic> canvas, ShapeDrawResources resources, DrawAppModel drawingModel, DrawingLayerModel drawingLayerModel)
     {
         toolbar = new ShapeDrawToolbar(drawingModel);
         this.canvas = canvas;

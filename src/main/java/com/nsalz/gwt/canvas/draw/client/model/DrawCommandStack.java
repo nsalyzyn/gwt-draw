@@ -5,11 +5,11 @@ import java.util.Stack;
 
 public class DrawCommandStack
 {
-    private final DrawingBoardModel drawingModel;
+    private final DrawingLayerModel drawingModel;
     private final Stack<DrawCommand> commands = new Stack<DrawCommand>();
     private final Stack<DrawCommand> undoneCommands = new Stack<DrawCommand>();
 
-    public DrawCommandStack(DrawingBoardModel drawingModel)
+    public DrawCommandStack(DrawingLayerModel drawingModel)
     {
         this.drawingModel = drawingModel;
     }

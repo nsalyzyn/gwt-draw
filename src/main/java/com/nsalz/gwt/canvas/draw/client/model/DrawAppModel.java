@@ -4,21 +4,22 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.SimpleEventBus;
-import com.nsalz.gwt.canvas.create.client.tools.DrawingBoard;
+import com.nsalz.gwt.canvas.create.client.tools.DrawingLayer;
 import com.nsalz.gwt.canvas.draw.client.control.DrawTool;
 import com.nsalz.gwt.canvas.draw.client.control.HasToolChangeHandler;
 import com.nsalz.gwt.canvas.draw.client.control.ToolChangeEvent;
 import com.nsalz.gwt.canvas.draw.client.control.ToolChangeHandler;
+import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 
 public class DrawAppModel implements HasToolChangeHandler
 {
-    private final DrawingBoardModel mainDrawingBoardModel;
+    private final DrawingLayerModel mainDrawingLayerModel;
     private final EventBus eventBus;
     private DrawTool currentTool;
 
-    public DrawAppModel(DrawingBoard mainDrawingBoard)
+    public DrawAppModel(DrawingLayer<ProjectGraphic> mainLayer)
     {
-        this.mainDrawingBoardModel = new DrawingBoardModel(mainDrawingBoard);
+        this.mainDrawingLayerModel = new DrawingLayerModel(mainLayer);
         this.eventBus = new SimpleEventBus();
     }
     
@@ -38,9 +39,9 @@ public class DrawAppModel implements HasToolChangeHandler
         return currentTool;
     }
     
-    public DrawingBoardModel getDrawingBoardModel()
+    public DrawingLayerModel getDrawingLayerModel()
     {
-        return mainDrawingBoardModel;
+        return mainDrawingLayerModel;
     }
 
     @Override

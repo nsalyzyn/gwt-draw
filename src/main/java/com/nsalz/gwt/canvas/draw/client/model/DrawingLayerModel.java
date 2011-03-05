@@ -2,16 +2,17 @@ package com.nsalz.gwt.canvas.draw.client.model;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.nsalz.gwt.canvas.create.client.tools.DrawingBoard;
+import com.nsalz.gwt.canvas.create.client.tools.DrawingLayer;
+import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 
-public class DrawingBoardModel implements ResizeHandler
+public class DrawingLayerModel implements ResizeHandler
 {
-    private final DrawingBoard mainDrawingBoard;
+    private final DrawingLayer<ProjectGraphic> mainLayer;
     private final DrawCommandStack undoStack = new DrawCommandStack(this);
 
-    public DrawingBoardModel(DrawingBoard mainDrawingBoard)
+    public DrawingLayerModel(DrawingLayer<ProjectGraphic> mainLayer)
     {
-        this.mainDrawingBoard = mainDrawingBoard;
+        this.mainLayer = mainLayer;
     }
     
     public DrawCommandStack getUndoStack()
@@ -19,10 +20,10 @@ public class DrawingBoardModel implements ResizeHandler
         return undoStack;
     }
     
-    public DrawingBoard getDrawingBoard()
+    public DrawingLayer<ProjectGraphic> getDrawingLayer()
     {
         // TODO return the sub drawing board where all the images actually go
-        return mainDrawingBoard;
+        return mainLayer;
     }
 
     @Override

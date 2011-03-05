@@ -4,8 +4,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.nsalz.gwt.canvas.create.client.ui.ShapeCanvas;
 import com.nsalz.gwt.canvas.draw.client.control.CanvasMouseController;
+import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
-import com.nsalz.gwt.canvas.draw.client.model.DrawingBoardModel;
+import com.nsalz.gwt.canvas.draw.client.model.DrawingLayerModel;
 import com.nsalz.gwt.canvas.draw.client.resource.ShapeDrawResources;
 import com.nsalz.gwt.canvas.draw.client.ui.ShapeDrawWidget;
 
@@ -16,21 +17,21 @@ public class ShapeDrawApp
 
     public ShapeDrawApp() throws ShapeDrawException
     {
-        ShapeCanvas canvas = ShapeCanvas.createIfSupported();
+        ShapeCanvas<ProjectGraphic> canvas = ShapeCanvas.createIfSupported();
         if (canvas == null) {
             throw new ShapeDrawException();
         }
-        DrawAppModel drawingModel = new DrawAppModel(canvas.getDrawingBoard());
+        DrawAppModel drawingModel = new DrawAppModel(canvas.getDrawingLayer());
         
         CanvasMouseController mouseController = new CanvasMouseController(drawingModel);       
         mouseController.addHandlers(canvas);
         
-        DrawingBoardModel drawingBoardModel = drawingModel.getDrawingBoardModel();
-        drawingBoardModel.setHeight(canvas.getOffsetHeight());
-        drawingBoardModel.setWidth(canvas.getOffsetWidth());
-        canvas.addResizeHandler(drawingBoardModel);       
+        DrawingLayerModel drawingLayerModel = drawingModel.getDrawingLayerModel();
+        drawingLayerModel.setHeight(canvas.getOffsetHeight());
+        drawingLayerModel.setWidth(canvas.getOffsetWidth());
+        canvas.addResizeHandler(drawingLayerModel);       
         
-        shapeDrawWidget = new ShapeDrawWidget(canvas, resources, drawingModel, drawingBoardModel);
+        shapeDrawWidget = new ShapeDrawWidget(canvas, resources, drawingModel, drawingLayerModel);
     }
 
     public void load(LayoutPanel panel)
