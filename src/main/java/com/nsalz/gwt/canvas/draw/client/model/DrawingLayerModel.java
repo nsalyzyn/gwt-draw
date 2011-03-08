@@ -104,7 +104,13 @@ public class DrawingLayerModel implements ResizeHandler
             repaint();
         }
     }
-    
+
+    public void shiftByPixels(int deltaX, int deltaY)
+    {
+        translateX += deltaX;
+        translateY += deltaY;
+    }
+
     public int getActualX(int x)
     {
         return getActualCoordinate(x, translateX, scale);
@@ -161,4 +167,5 @@ public class DrawingLayerModel implements ResizeHandler
     {
         return (double)coordinate - (newScale/oldScale) * ((double)coordinate - translation);
     }
+
 }

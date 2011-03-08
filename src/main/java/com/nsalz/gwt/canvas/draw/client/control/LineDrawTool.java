@@ -24,33 +24,41 @@ public class LineDrawTool extends BaseDrawTool
     }
 
     @Override
-    public void onMouseDown(int x, int y)
+    public void onClick(int x, int y)
     {
-        DrawingLayerModel model = getDrawModel().getDrawingLayerModel();
-        x = model.getActualX(x);
-        y = model.getActualY(y);
-        
-        path = new LinePath(x, y, x, y);
-        model.getWorkingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path, stroke)));
-        model.repaint();
+        super.onClick(x, y);
+        if (graphic == null) {
+            DrawingLayerModel model = getDrawModel().getDrawingLayerModel();
+            x = model.getActualX(x);
+            y = model.getActualY(y);
+
+            path = new LinePath(x, y, x, y);
+            model.getWorkingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path, stroke)));
+            model.repaint();
+        } else {
+            getDrawModel().getDrawingLayerModel().getWorkingLayer().getGraphicList().clear();
+            getDrawModel().getDrawingLayerModel().getUndoStack().doCommand(new PushGraphicCommand(graphic));
+            graphic = null;
+            path = null;
+        }
     }
 
     @Override
-    public void onRightMouseDown(int x, int y)
+    public void onCancelKey()
     {
+        super.onCancelKey();
         if (graphic != null) {
             getDrawModel().getDrawingLayerModel().getWorkingLayer().getGraphicList().clear();
             getDrawModel().getDrawingLayerModel().repaint();
             path = null;
             graphic = null;
-        } else {
-            super.onRightMouseDown(x, y);
         }
     }
 
     @Override
     public void onMouseMove(int x, int y)
     {
+        super.onMouseMove(x, y);
         if (path != null) {
             DrawingLayerModel model = getDrawModel().getDrawingLayerModel();
             x = model.getActualX(x);
@@ -61,16 +69,4 @@ public class LineDrawTool extends BaseDrawTool
             getDrawModel().getDrawingLayerModel().repaint();
         }
     }
-
-    @Override
-    public void onMouseUp(int x, int y)
-    {
-        if (graphic != null) {
-            getDrawModel().getDrawingLayerModel().getWorkingLayer().getGraphicList().clear();
-            getDrawModel().getDrawingLayerModel().getUndoStack().doCommand(new PushGraphicCommand(graphic));
-            graphic = null;
-            path = null;
-        }
-    }
-
 }

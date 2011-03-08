@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
@@ -64,6 +65,12 @@ public class CanvasMouseController
                                     drawingModel.getDrawingLayerModel().getUndoStack().redo();
                                 }
                             }
+                        }
+                    }
+                    else if (nativeEvent.getKeyCode() == KeyCodes.KEY_ESCAPE) {
+                        DrawTool tool = drawingModel.getCurrentTool();
+                        if (tool != null) {
+                            tool.onCancelKey();
                         }
                     }
                 }
@@ -217,6 +224,10 @@ public class CanvasMouseController
                             switch (event.getNativeEvent().getButton()) {
                             case NativeEvent.BUTTON_LEFT:
                                 tool.onMouseUp(x, y);
+                                break;
+                            case NativeEvent.BUTTON_RIGHT:
+                                tool.onRightMouseUp(x, y);
+                                break;
                             }
                         }
                     }

@@ -5,6 +5,8 @@ import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
 public class BaseDrawTool implements DrawTool
 {
     private DrawAppModel drawingModel;
+    private boolean rightDown = false;
+    private int lastX, lastY;
 
     public BaseDrawTool(DrawAppModel drawingModel)
     {
@@ -41,14 +43,36 @@ public class BaseDrawTool implements DrawTool
 
     @Override
     public void onRightMouseDown(int x, int y)
-    {}
+    {
+        rightDown = true;
+        lastX = x;
+        lastY = y;
+    }
 
     @Override
     public void onMouseMove(int x, int y)
-    {}
+    {
+        if (rightDown) {
+            getDrawModel().getDrawingLayerModel().shiftByPixels(x - lastX, y - lastY);
+            
+            lastX = x;
+            lastY = y;
+            getDrawModel().getDrawingLayerModel().repaint();
+        }
+    }
 
     @Override
     public void onMouseUp(int x, int y)
     {}
+
+    @Override
+    public void onCancelKey()
+    {}
+
+    @Override
+    public void onRightMouseUp(int x, int y)
+    {
+        rightDown = false;
+    }
 
 }

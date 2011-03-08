@@ -14,7 +14,11 @@ public interface DrawTool
 
     public void onRightMouseDown(int x, int y);
 
+    public void onRightMouseUp(int x, int y);
+
     public void onDoubleClick(int x, int y);
     
     public void onMouseWheel(int delta, int x, int y);
+
+    public void onCancelKey();
 }
