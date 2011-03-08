@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.nsalz.gwt.canvas.draw.client.control.DrawTool;
+import com.nsalz.gwt.canvas.draw.client.control.LineDragTool;
 import com.nsalz.gwt.canvas.draw.client.control.LineDrawTool;
 import com.nsalz.gwt.canvas.draw.client.control.MoveDrawTool;
 import com.nsalz.gwt.canvas.draw.client.control.ToolChangeEvent;
@@ -31,6 +32,7 @@ public class ShapeDrawToolbar extends Composite
         
         drawingModel.setCurrentTool(new LineDrawTool(drawingModel));
         panel.add(createToolButton(drawingModel.getCurrentTool(), "Line"));
+        panel.add(createToolButton(new LineDragTool(drawingModel), "Line Drag"));
         panel.add(createToolButton(new MoveDrawTool(drawingModel), "Hand"));
         
         drawingModel.addToolChangeHandler(new ToolChangeHandler(){

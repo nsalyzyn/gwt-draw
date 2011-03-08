@@ -2,25 +2,21 @@ package com.nsalz.gwt.canvas.draw.client.control;
 
 import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
 
-public class LineDrawTool extends BaseDrawTool
+public class LineDragTool extends BaseDrawTool
 {
     private final LineTool lineTool;
-
-    public LineDrawTool(DrawAppModel drawingModel)
+    
+    public LineDragTool(DrawAppModel drawingModel)
     {
         super(drawingModel);
         this.lineTool = new LineTool(drawingModel);
     }
 
     @Override
-    public void onClick(int x, int y)
+    public void onMouseDown(int x, int y)
     {
-        super.onClick(x, y);
-        if (lineTool.isLineStarted()) {
-            lineTool.finishLine(x, y);
-        } else {
-            lineTool.startLine(x, y);
-        }
+        super.onMouseDown(x, y);
+        lineTool.startLine(x, y);
     }
 
     @Override
@@ -36,4 +32,12 @@ public class LineDrawTool extends BaseDrawTool
         super.onMouseMove(x, y);
         lineTool.moveLine(x, y);
     }
+    
+    @Override
+    public void onMouseUp(int x, int y)
+    {
+        super.onMouseUp(x, y);
+        lineTool.finishLine(x, y);
+    }
+
 }
