@@ -199,7 +199,7 @@ public class CanvasMouseController
                 {
                     DrawTool tool = drawingModel.getCurrentTool();
                     if (tool != null) {
-                        tool.onMouseWheel(event.getDeltaY());
+                        tool.onMouseWheel(event.getDeltaY(), event.getX(), event.getY());
                     }
                 }
             });

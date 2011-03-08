@@ -45,6 +45,7 @@ public class ShapeDrawToolbar extends Composite
             @Override
             public void onClick(ClickEvent event)
             {
+                ShapeDrawToolbar.this.drawingModel.getDrawingLayerModel().center();
                 ShapeDrawToolbar.this.drawingModel.getDrawingLayerModel().setZoomFactor(0);
                 ShapeDrawToolbar.this.drawingModel.getDrawingLayerModel().repaint();
             }

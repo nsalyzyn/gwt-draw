@@ -6,6 +6,7 @@ import com.nsalz.gwt.canvas.create.client.tools.Stroke;
 import com.nsalz.gwt.canvas.create.client.tools.LineStyle.Cap;
 import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 import com.nsalz.gwt.canvas.draw.client.model.DrawAppModel;
+import com.nsalz.gwt.canvas.draw.client.model.DrawingLayerModel;
 
 public class LineDrawTool extends BaseDrawTool
 {
@@ -25,9 +26,13 @@ public class LineDrawTool extends BaseDrawTool
     @Override
     public void onMouseDown(int x, int y)
     {
+        DrawingLayerModel model = getDrawModel().getDrawingLayerModel();
+        x = model.getActualX(x);
+        y = model.getActualY(y);
+        
         path = new LinePath(x, y, x, y);
-        getDrawModel().getDrawingLayerModel().getWorkingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path, stroke)));
-        getDrawModel().getDrawingLayerModel().repaint();
+        model.getWorkingLayer().addGraphic(graphic = new ProjectGraphic(new ShapeGraphic(path, stroke)));
+        model.repaint();
     }
 
     @Override
@@ -47,6 +52,10 @@ public class LineDrawTool extends BaseDrawTool
     public void onMouseMove(int x, int y)
     {
         if (path != null) {
+            DrawingLayerModel model = getDrawModel().getDrawingLayerModel();
+            x = model.getActualX(x);
+            y = model.getActualY(y);
+
             path.setX2(x);
             path.setY2(y);
             getDrawModel().getDrawingLayerModel().repaint();

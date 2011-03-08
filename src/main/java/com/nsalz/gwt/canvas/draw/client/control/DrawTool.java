@@ -16,5 +16,5 @@ public interface DrawTool
 
     public void onDoubleClick(int x, int y);
     
-    public void onMouseWheel(int delta);
+    public void onMouseWheel(int delta, int x, int y);
 }

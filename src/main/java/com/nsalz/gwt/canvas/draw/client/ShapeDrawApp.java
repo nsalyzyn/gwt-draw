@@ -24,8 +24,7 @@ public class ShapeDrawApp
         mouseController.addHandlers(canvas);
         
         DrawingLayerModel drawingLayerModel = drawingModel.getDrawingLayerModel();
-        drawingLayerModel.setHeight(canvas.getOffsetHeight());
-        drawingLayerModel.setWidth(canvas.getOffsetWidth());
+        drawingLayerModel.setDimensions(canvas.getOffsetHeight(), canvas.getOffsetWidth());
         canvas.addResizeHandler(drawingLayerModel);       
         
         shapeDrawWidget = new ShapeDrawWidget(canvas, drawingModel, drawingLayerModel);

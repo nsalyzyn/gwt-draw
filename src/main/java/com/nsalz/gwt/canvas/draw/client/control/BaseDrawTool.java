@@ -33,9 +33,9 @@ public class BaseDrawTool implements DrawTool
     {}
 
     @Override
-    public void onMouseWheel(int delta)
+    public void onMouseWheel(int delta, int x, int y)
     {
-        getDrawModel().getDrawingLayerModel().increaseZoomFactor(-delta);
+        getDrawModel().getDrawingLayerModel().increaseZoomFactor(-delta, x, y);
         getDrawModel().getDrawingLayerModel().repaint();
     }
 

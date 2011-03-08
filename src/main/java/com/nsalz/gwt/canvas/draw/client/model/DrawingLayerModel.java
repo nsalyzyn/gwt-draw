@@ -8,16 +8,21 @@ import com.nsalz.gwt.canvas.draw.client.graphics.ProjectGraphic;
 
 public class DrawingLayerModel implements ResizeHandler
 {
-    private static final int ZOOM_MIN = -20;
-    private static final int ZOOM_MAX = 30;
+    private static final int ZOOM_MIN = -15;
+    private static final int ZOOM_MAX = 60;
     private static final double SCALE_RATE = 1.05;
     
     private final DrawingLayer<ProjectGraphic> mainLayer;
     private final DrawingLayer<ProjectGraphic> drawingLayer;
     private final DrawingLayer<ProjectGraphic> workingLayer;
     private final DrawCommandStack undoStack = new DrawCommandStack(this);
+
     private int zoomFactor = 0;
     private double scale = 1.0;
+    private int currentHeight = 0;
+    private int currentWidth = 0;
+    private double translateX = 0.0;
+    private double translateY = 0.0;
 
     public DrawingLayerModel(DrawingLayer<ProjectGraphic> mainLayer)
     {
@@ -27,6 +32,7 @@ public class DrawingLayerModel implements ResizeHandler
             public void applyTransform(TransformTool transformTool)
             {
                 transformTool.scale(scale);
+                transformTool.translate(translateX, translateY);
             }
         });
         
@@ -53,40 +59,68 @@ public class DrawingLayerModel implements ResizeHandler
     {
         return drawingLayer;
     }
+    
+    public void center()
+    {
+        translateX = currentWidth/2.0;
+        translateY = currentHeight/2.0;
+    }
 
     public void setZoomFactor(int factor)
     {
+        setZoomFactor(factor, currentWidth/2, currentHeight/2);
+    }
+    
+    public void setZoomFactor(int factor, int x, int y)
+    {
         zoomFactor = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, factor));
-        recalculateScale();
+        recalculateScale(x, y);
     }
 
     public void increaseZoomFactor(int factor)
     {
+        increaseZoomFactor(factor, currentWidth/2, currentHeight/2);
+    }
+
+    public void increaseZoomFactor(int factor, int x, int y)
+    {
         zoomFactor = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoomFactor + factor));
-        recalculateScale();
+        recalculateScale(x, y);
     }
 
     @Override
     public void onResize(ResizeEvent event)
     {
-        // TODO Auto-generated method stub
-        
+        setDimensions(event.getHeight(), event.getWidth());
     }
 
-    public void setHeight(int height)
+    public void setDimensions(int height, int width)
     {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setWidth(int width)
-    {
-        // TODO Auto-generated method stub
-        
+        if (height != currentHeight || width != currentWidth) {
+            translateX += (width - currentWidth)/(2*scale);
+            translateY += (height - currentHeight)/(2*scale);
+            currentWidth = width;
+            currentHeight = height;
+            repaint();
+        }
     }
     
-    private void recalculateScale()
+    public int getActualX(int x)
     {
+        return (int)Math.round((x - translateX)/scale);
+    }
+    
+    public int getActualY(int y)
+    {
+        return (int)Math.round((y - translateY)/scale);
+    }
+    
+    private void recalculateScale(int x, int y)
+    {
+        double oldScale = scale;
         scale = Math.pow(SCALE_RATE, zoomFactor);
+        
+        translateX = (double)x - (scale/oldScale) * ((double)x - translateX);
+        translateY = (double)y - (scale/oldScale) * ((double)y - translateY);
     }
 }
