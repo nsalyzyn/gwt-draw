@@ -107,12 +107,12 @@ public class DrawingLayerModel implements ResizeHandler
     
     public int getActualX(int x)
     {
-        return (int)Math.round((x - translateX)/scale);
+        return getActualCoordinate(x, translateX, scale);
     }
     
     public int getActualY(int y)
     {
-        return (int)Math.round((y - translateY)/scale);
+        return getActualCoordinate(y, translateY, scale);
     }
     
     private void recalculateScale(int x, int y)
@@ -120,7 +120,45 @@ public class DrawingLayerModel implements ResizeHandler
         double oldScale = scale;
         scale = Math.pow(SCALE_RATE, zoomFactor);
         
-        translateX = (double)x - (scale/oldScale) * ((double)x - translateX);
-        translateY = (double)y - (scale/oldScale) * ((double)y - translateY);
+        translateX = maintainTranslationOnScale(x, translateX, scale, oldScale);
+        translateY = maintainTranslationOnScale(y, translateY, scale, oldScale);
+    }
+    
+    /**
+     * <pre>
+     * |------|--------|----|
+     *        0       act  clicked    
+     * <-------------------->
+     *        coord
+     * <------>
+     *    tr
+     * </pre>
+     */
+    private static int getActualCoordinate(int coordinate, double translation, double scale)
+    {
+        return (int)Math.round((coordinate - translation)/scale);
+    }
+    
+    /**
+     * <pre>
+     * |------|-------|------|              |-----|-------|-------|
+     *        0      act   clicked                0      act     newpos
+     * <-------------------->         ====> <--------------------->
+     *        coord                                   coord
+     * <------><------------->              <-----><-------------->
+     *    tr1        a1                       tr2         a2
+     * </pre>
+     * 
+     * clicked = tr1 + a1
+     * newpos = clicked
+     * newpos = tr2 + a2
+     * a2 = (newscale/oldscale)*a1
+     * a2 = (newscale/oldscale)*(clicked - tr1)
+     * tr2 = clicked - a2
+     * tr2 = clicked - (newscale/oldscale)*(clicked - tr1)
+     */
+    private static double maintainTranslationOnScale(int coordinate, double translation, double newScale, double oldScale)
+    {
+        return (double)coordinate - (newScale/oldScale) * ((double)coordinate - translation);
     }
 }
